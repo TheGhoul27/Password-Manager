@@ -1,21 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 var client = require('./client.js');
-var kill = require('tree-kill');
-
-function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-        currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
-}
-
-function test(params) {
-    for (var i = 0; i < params.length; i++) {
-        console.log(params[i]);
-    }
-}
 
 export const createUser = async (firstName, lastName, email, password) => {
     try {
