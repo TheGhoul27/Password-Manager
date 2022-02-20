@@ -155,14 +155,20 @@ function forgotPassword(params) {
   var client = xmlrpc.createClient({ host: 'localhost', port: 5050, path: '/' });
   return new Promise(function (resolve, reject) {
     return client.methodCall('forgotPassword', params, function (error, value) {
+      var res
+      for (const key in value) {
+        if (key === 'response') {
+          res = JSON.parse(value[key].toString()).returnvalue
+        }
+      }
       if (error === null) {
-        if (value === true) {
-          console.log('Password Sent!!');
-          return resolve('Password Sent!!');
+        if (res) {
+          console.log('Operation Done!!');
+          return resolve(true);
         }
         else {
-          console.log('User Not Found!!');
-          return resolve('User Not Found!!');
+          console.log('Operation Aborted!!');
+          return resolve(false);
         }
       }
       else {

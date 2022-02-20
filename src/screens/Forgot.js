@@ -1,6 +1,6 @@
 import { useState} from 'react'
 import { useHistory } from 'react-router-dom';
-import {loginUser} from '../models'
+import {forgotPassword} from '../models'
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { Flash } from '../components/Flash/flash';
 
-export default function SignIn() {
+export default function ForgotPassword() {
 
   const history = useHistory()
   if (localStorage.getItem('email')) {
@@ -26,22 +26,22 @@ export default function SignIn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const body = {
-      email: event.target.email.value,
-      password: event.target.password.value
+      email: event.target.email.value
     }
 
     // Handle login logic
 
-    if (!body.email || !body.password) {
+    if (!body.email) {
       setValidated(true);
     } else {
-      const user = await loginUser(body.email, body.password)
+      const user = await forgotPassword(body.email)
       if (user) {
-        localStorage.setItem('email', body.email)
-        history.push('/');
-        window.flash('Logged in successfully!', 'success')
+        //localStorage.setItem('email', body.email)
+        localStorage.clear()
+        history.push('/login');
+        window.flash('Password sent successfully!', 'success')
       } else {
-        window.flash('Invalid email or password', 'error')
+        window.flash('Invalid email', 'error')
       }
     }
   }
@@ -52,7 +52,7 @@ export default function SignIn() {
       <Flash />
       <Container className='d-flex flex-column align-items-center justify-content-center' style={{ height: '80vh' }}>
         <p className="h3 display-4"><FontAwesomeIcon icon={faUserCircle} size="1x" /></p>
-        <p className="h2 display-5">Sign in</p>
+        <p className="h2 display-5">Forgot Password</p>
         <Form noValidate validated={validated} onSubmit={handleSubmit} style={{ minWidth: '300px' }}>
           <Form.Row>
             <Form.Group as={Col} md="12" controlId="validationCustom01">
@@ -62,16 +62,7 @@ export default function SignIn() {
               <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
-          <Form.Row>
-            <Form.Group as={Col} md="12" controlId="validationCustom02">
-              <Form.Label>Password</Form.Label>
-              <Form.Control required name='password' type="password" placeholder="Password" />
-              <Form.Control.Feedback type="invalid">Please provide a password.</Form.Control.Feedback>
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-            </Form.Group>
-          </Form.Row>
-          <Button type="submit">Sign in</Button>
-          <p className="text-center"><Link to="/forgot">Forgot Password</Link></p>
+          <Button type="submit">Forgot Password</Button>
           <p className="text-center"><Link to="/register">Register</Link> to create account!</p>
         </Form>
       </Container>

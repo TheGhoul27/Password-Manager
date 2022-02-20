@@ -68,3 +68,8 @@ export const deletePassword = async id => {
     let deletePassword = await client.deletePass(id)
     return;
 };
+
+export const forgotPassword = async (email) => {
+    let forgot = await client.forgotPassword([email])
+    return forgot;
+};

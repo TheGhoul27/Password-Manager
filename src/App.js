@@ -9,6 +9,7 @@ import AppDashboard from './screens/App';
 import Home from "./screens/Home";
 import Signin from "./screens/Signin";
 import Signup from "./screens/Signup";
+import ForgotPassword from "./screens/Forgot";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const event = new EventEmitter()
@@ -25,6 +26,7 @@ const App = () => {
         <Route exact path="/dashboard" component={AppDashboard} />
         <Route exact path="/login" component={Signin} />
         <Route exact path="/register" component={Signup} />
+        <Route exact path="/forgot" component={ForgotPassword} />
         <Route exact path="/logout" component={() => {
           if (!localStorage.getItem('email')) {
             setTimeout(() => {
