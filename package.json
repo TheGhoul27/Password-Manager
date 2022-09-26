@@ -22,7 +22,10 @@
       "publisherName": "https://theghoul27.github.io/PassManage/",
       "legalTrademarks": "(c) 2022 https://theghoul27.github.io/PassManage/",
       "icon": "build/favicon.png",
-      "target": ["nsis", "zip"],
+      "target": [
+        "nsis",
+        "zip"
+      ],
       "asar": true
     },
     "nsis": {
@@ -89,7 +92,7 @@
   },
   "devDependencies": {
     "concurrently": "^5.0.0",
-    "electron": "^7.1.0",
+    "electron": "^7.3.3",
     "electron-builder": "^22.1.0",
     "wait-on": "^3.3.0"
   }
