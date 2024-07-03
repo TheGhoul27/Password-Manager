@@ -26,20 +26,25 @@ export default function ForgotPassword() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const body = {
-      email: event.target.email.value
+      email: event.target.email.value,
+      seq1: event.target.seq1.value,
+      seq2: event.target.seq2.value,
+      ans1: event.target.ans1.value,
+      ans2: event.target.ans2.value,
+      password: event.target.password.value
     }
 
     // Handle login logic
 
-    if (!body.email) {
+    if (!body.email || !body.seq1 || !body.seq2 || !body.ans1 || !body.ans2 || !body.password) {
       setValidated(true);
     } else {
-      const user = await forgotPassword(body.email)
+      const user = await forgotPassword(body.email, body.seq1, body.ans1, body.seq2, body.ans2, body.password)
       if (user) {
         //localStorage.setItem('email', body.email)
         localStorage.clear()
         history.push('/login');
-        window.flash('Password sent successfully!', 'success')
+        window.flash('Password reset successfully!', 'success')
       } else {
         window.flash('Invalid email', 'error')
       }
@@ -59,6 +64,42 @@ export default function ForgotPassword() {
               <Form.Label>Email</Form.Label>
               <Form.Control required name='email' type="email" placeholder="Email" />
               <Form.Control.Feedback type="invalid">Please provide a valid email.</Form.Control.Feedback>
+              <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group as={Col} md="6" controlId="validationCustomUsername">
+              <Form.Label>Security Question 1</Form.Label>
+              <Form.Control required name='seq1' type="text" placeholder="Security Question 1" />
+              <Form.Control.Feedback type="invalid">Please provide a security question.</Form.Control.Feedback>
+              <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} md="6" controlId="validationCustomUsername">
+              <Form.Label>Answer 1</Form.Label>
+              <Form.Control required name='ans1' type="text" placeholder="Answer 1" />
+              <Form.Control.Feedback type="invalid">Please provide an answer.</Form.Control.Feedback>
+              <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group as={Col} md="6" controlId="validationCustomUsername">
+              <Form.Label>Security Question 2</Form.Label>
+              <Form.Control required name='seq2' type="text" placeholder="Security Question 2" />
+              <Form.Control.Feedback type="invalid">Please provide a security question.</Form.Control.Feedback>
+              <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} md="6" controlId="validationCustomUsername">
+              <Form.Label>Answer 2</Form.Label>
+              <Form.Control required name='ans2' type="text" placeholder="Answer 2" />
+              <Form.Control.Feedback type="invalid">Please provide an answer.</Form.Control.Feedback>
+              <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
+            </Form.Group> 
+          </Form.Row>
+          <Form.Row>
+            <Form.Group as={Col} md="12" controlId="validationCustomUsername">
+              <Form.Label>New Password</Form.Label>
+              <Form.Control required name='password' type="password" placeholder="New Password" />
+              <Form.Control.Feedback type="invalid">Please provide a password.</Form.Control.Feedback>
               <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
