@@ -2,10 +2,10 @@
 /* eslint-disable no-undef */
 var client = require('./client.js');
 
-export const createUser = async (firstName, lastName, email, password) => {
+export const createUser = async (firstName, lastName, email, password, securityq1, securitya1, securityq2, securitya2) => {
     try {
         const userName = firstName.concat(' ', lastName);
-        let newUser = await client.addUser([userName, email, password])
+        let newUser = await client.addUser([userName, email, password, securityq1, securitya1, securityq2, securitya2])
         if (newUser !== 'User Added!!') return
         return newUser
     } catch (error) {
@@ -54,7 +54,7 @@ export const deletePassword = async id => {
     return;
 };
 
-export const forgotPassword = async (email) => {
-    let forgot = await client.forgotPassword([email])
+export const forgotPassword = async (email, securityq1, securitya1, securityq2, securitya2, newPassword) => {
+    let forgot = await client.forgotPassword([email, securityq1, securitya1, securityq2, securitya2, newPassword])
     return forgot;
 };
