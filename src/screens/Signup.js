@@ -29,12 +29,16 @@ export default function SignIn() {
       firstName: e.target.firstName.value,
       lastName: e.target.lastName.value,
       email: e.target.email.value,
-      password: e.target.password.value
+      password: e.target.password.value,
+      sec1q: e.target.sec1q.value,
+      sec2q: e.target.sec2q.value,
+      sec1a: e.target.sec1a.value,
+      sec2a: e.target.sec2a.value
     }
 
     try {
-      if (body.firstName && body.lastName && body.password && body.email && body.password === e.target.confirm_password.value) {
-        const user = await createUser(body.firstName, body.lastName, body.email, body.password)
+      if (body.firstName && body.lastName && body.password && body.email && body.password === e.target.confirm_password.value && body.sec1q && body.sec2q && body.sec1a && body.sec2a) {
+        const user = await createUser(body.firstName, body.lastName, body.email, body.password, body.sec1q, body.sec1a, body.sec2q, body.sec2a)
         if (!user) {
           window.flash('Email has been chosen', 'error')
         } else {
@@ -92,6 +96,34 @@ export default function SignIn() {
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control type="password" placeholder="Confirm Password" required name='confirm_password' />
               <Form.Control.Feedback type="invalid">Fields do not match.</Form.Control.Feedback>
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group as={Col} md="6" controlId="validationCustomUsername">
+              <Form.Label>Security Question 1</Form.Label>
+              <Form.Control type="text" placeholder="Security Question 1" aria-describedby="inputGroupPrepend" required name='sec1q' />
+              <Form.Control.Feedback type="invalid">Please provide a security question.</Form.Control.Feedback>
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} md="6" controlId="validationCustomUsername">
+              <Form.Label>Security Answer 1</Form.Label>
+              <Form.Control type="text" placeholder="Security Answer 1" aria-describedby="inputGroupPrepend" required name='sec1a' />
+              <Form.Control.Feedback type="invalid">Please provide a security answer.</Form.Control.Feedback>
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group as={Col} md="6" controlId="validationCustomUsername">
+              <Form.Label>Security Question 2</Form.Label>
+              <Form.Control type="text" placeholder="Security Question 2" aria-describedby="inputGroupPrepend" required name='sec2q' />
+              <Form.Control.Feedback type="invalid">Please provide a security question.</Form.Control.Feedback>
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} md="6" controlId="validationCustomUsername">
+              <Form.Label>Security Answer 2</Form.Label>
+              <Form.Control type="text" placeholder="Security Answer 2" aria-describedby="inputGroupPrepend" required name='sec2a' />
+              <Form.Control.Feedback type="invalid">Please provide a security answer.</Form.Control.Feedback>
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
