@@ -31,7 +31,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import {Flash} from '../components/Flash/flash'
 import hero1 from '../assets/illus5.jpg';
-import hero from '../assets/illus.jpg';
+import hero from '../assets/illus7.png';
 
 const Home = () => {
   return (
@@ -42,18 +42,14 @@ const Home = () => {
         <h2>Welcome to Password Manager</h2>
       </Container>
       <Container style={{ display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-        {/* <p>Password managers offer greater security and convenience for the use of passwords to access online services. Greater security is achieved principally through
-          the capability of most password manager applications to generate unique, long, complex, easily changed passwords for all online accounts and the secure
-          encrypted storage of those passwords on the local device. Greater convenience is provided using a single master password to access the password vault rather
-          than attempting to memorize different passwords for all accounts.
-          <br></br>
+        <p>
           <h5>Navigation</h5>
           <ul>
-            <li>Navigate to SignIn/SignUp page to login or regiter. Each user has his/her own login ID to access the Password Vault. To make sure other user's password doesn't
+            <li>Navigate to SignIn/SignUp page to login or regiter. Each user has his/her own login ID to access the Password Vault. To make sure that other user's password doesn't
                 clash you need to create a usinque ID.</li>
             <li>To Add new password and access all passwords stored, navigate to the Dashboard page from Navbar. All passwords stored are encrypted.</li>
           </ul>
-        </p> */}
+        </p>
       </Container>
       <Container style={{ height: "50vh", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
         <img src={hero1} alt="" className="h-25 shadow-lg mx-2" style={{ border: "none", borderRadius: "15px" }} />
