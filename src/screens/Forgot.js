@@ -1,6 +1,6 @@
-import { useState} from 'react'
+import { useState } from 'react'
 import { useHistory } from 'react-router-dom';
-import {forgotPassword} from '../models'
+import { forgotPassword } from '../models'
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -18,7 +18,7 @@ export default function ForgotPassword() {
     setTimeout(() => {
       window.flash('You are logged in', 'warning')
     }, 100)
-    history.push('/') 
+    history.push('/')
   }
 
   const [validated, setValidated] = useState(false);
@@ -34,19 +34,16 @@ export default function ForgotPassword() {
       password: event.target.password.value
     }
 
-    // Handle login logic
-
     if (!body.email || !body.seq1 || !body.seq2 || !body.ans1 || !body.ans2 || !body.password) {
       setValidated(true);
     } else {
       const user = await forgotPassword(body.email, body.seq1, body.ans1, body.seq2, body.ans2, body.password)
       if (user) {
-        //localStorage.setItem('email', body.email)
         localStorage.clear()
         history.push('/login');
         window.flash('Password reset successfully!', 'success')
       } else {
-        window.flash('Invalid email', 'error')
+        window.flash('Invalid email or answers', 'error')
       }
     }
   }
@@ -70,7 +67,24 @@ export default function ForgotPassword() {
           <Form.Row>
             <Form.Group as={Col} md="6" controlId="validationCustomUsername">
               <Form.Label>Security Question 1</Form.Label>
-              <Form.Control required name='seq1' type="text" placeholder="Security Question 1" />
+              <Form.Control as="select" required name='seq1'>
+                <option value="">Choose...</option>
+                <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+                <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                <option value="What was the name of your elementary school?">What was the name of your elementary school?</option>
+                <option value="In what city were you born?">In what city were you born?</option>
+                <option value="What is your favorite food?">What is your favorite food?</option>
+                <option value="What was your childhood nickname?">What was your childhood nickname?</option>
+                <option value="What is the name of your favorite childhood friend?">What is the name of your favorite childhood friend?</option>
+                <option value="What was the name of the street you grew up on?">What was the name of the street you grew up on?</option>
+                <option value="What is the name of your first school?">What is the name of your first school?</option>
+                <option value="What is your favorite book?">What is your favorite book?</option>
+                <option value="What is your favorite movie?">What is your favorite movie?</option>
+                <option value="What is the name of your first employer?">What is the name of your first employer?</option>
+                <option value="What is the name of the town where your first job was located?">What is the name of the town where your first job was located?</option>
+                <option value="What was the make and model of your first car?">What was the make and model of your first car?</option>
+                <option value="What was the name of your first-grade teacher?">What was the name of your first-grade teacher?</option>
+              </Form.Control>
               <Form.Control.Feedback type="invalid">Please provide a security question.</Form.Control.Feedback>
               <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
             </Form.Group>
@@ -84,7 +98,24 @@ export default function ForgotPassword() {
           <Form.Row>
             <Form.Group as={Col} md="6" controlId="validationCustomUsername">
               <Form.Label>Security Question 2</Form.Label>
-              <Form.Control required name='seq2' type="text" placeholder="Security Question 2" />
+              <Form.Control as="select" required name='seq2'>
+                <option value="">Choose...</option>
+                <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+                <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                <option value="What was the name of your elementary school?">What was the name of your elementary school?</option>
+                <option value="In what city were you born?">In what city were you born?</option>
+                <option value="What is your favorite food?">What is your favorite food?</option>
+                <option value="What was your childhood nickname?">What was your childhood nickname?</option>
+                <option value="What is the name of your favorite childhood friend?">What is the name of your favorite childhood friend?</option>
+                <option value="What was the name of the street you grew up on?">What was the name of the street you grew up on?</option>
+                <option value="What is the name of your first school?">What is the name of your first school?</option>
+                <option value="What is your favorite book?">What is your favorite book?</option>
+                <option value="What is your favorite movie?">What is your favorite movie?</option>
+                <option value="What is the name of your first employer?">What is the name of your first employer?</option>
+                <option value="What is the name of the town where your first job was located?">What is the name of the town where your first job was located?</option>
+                <option value="What was the make and model of your first car?">What was the make and model of your first car?</option>
+                <option value="What was the name of your first-grade teacher?">What was the name of your first-grade teacher?</option>
+              </Form.Control>
               <Form.Control.Feedback type="invalid">Please provide a security question.</Form.Control.Feedback>
               <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
             </Form.Group>
@@ -93,7 +124,7 @@ export default function ForgotPassword() {
               <Form.Control required name='ans2' type="text" placeholder="Answer 2" />
               <Form.Control.Feedback type="invalid">Please provide an answer.</Form.Control.Feedback>
               <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
-            </Form.Group> 
+            </Form.Group>
           </Form.Row>
           <Form.Row>
             <Form.Group as={Col} md="12" controlId="validationCustomUsername">
@@ -104,7 +135,7 @@ export default function ForgotPassword() {
             </Form.Group>
           </Form.Row>
           <Button type="submit">Forgot Password</Button>
-          <p className="text-center"><Link to="/register">Register</Link> to create account!</p>
+          <p className="text-center"><Link to="/register">Register</Link> to create an account!</p>
         </Form>
       </Container>
     </>

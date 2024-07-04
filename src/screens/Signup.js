@@ -14,10 +14,10 @@ import { Flash } from '../components/Flash/flash';
 export default function SignIn() {
 
   const history = useHistory();
-    if (localStorage.getItem('email')) {
-      setTimeout(() => {
+  if (localStorage.getItem('email')) {
+    setTimeout(() => {
       window.flash('You are logged in', 'warning')
-      }, 100)
+    }, 100)
     history.push('/')
   }
 
@@ -102,7 +102,14 @@ export default function SignIn() {
           <Form.Row>
             <Form.Group as={Col} md="6" controlId="validationCustomUsername">
               <Form.Label>Security Question 1</Form.Label>
-              <Form.Control type="text" placeholder="Security Question 1" aria-describedby="inputGroupPrepend" required name='sec1q' />
+              <Form.Control as="select" required name='sec1q'>
+                <option value="">Choose...</option>
+                <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+                <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                <option value="What was the name of your elementary school?">What was the name of your elementary school?</option>
+                <option value="In what city were you born?">In what city were you born?</option>
+                <option value="What is your favorite food?">What is your favorite food?</option>
+              </Form.Control>
               <Form.Control.Feedback type="invalid">Please provide a security question.</Form.Control.Feedback>
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
@@ -116,7 +123,24 @@ export default function SignIn() {
           <Form.Row>
             <Form.Group as={Col} md="6" controlId="validationCustomUsername">
               <Form.Label>Security Question 2</Form.Label>
-              <Form.Control type="text" placeholder="Security Question 2" aria-describedby="inputGroupPrepend" required name='sec2q' />
+              <Form.Control as="select" required name='sec2q'>
+                <option value="">Choose...</option>
+                <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+                <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                <option value="What was the name of your elementary school?">What was the name of your elementary school?</option>
+                <option value="In what city were you born?">In what city were you born?</option>
+                <option value="What is your favorite food?">What is your favorite food?</option>
+                <option value="What was your childhood nickname?">What was your childhood nickname?</option>
+                <option value="What is the name of your favorite childhood friend?">What is the name of your favorite childhood friend?</option>
+                <option value="What was the name of the street you grew up on?">What was the name of the street you grew up on?</option>
+                <option value="What is the name of your first school?">What is the name of your first school?</option>
+                <option value="What is your favorite book?">What is your favorite book?</option>
+                <option value="What is your favorite movie?">What is your favorite movie?</option>
+                <option value="What is the name of your first employer?">What is the name of your first employer?</option>
+                <option value="What is the name of the town where your first job was located?">What is the name of the town where your first job was located?</option>
+                <option value="What was the make and model of your first car?">What was the make and model of your first car?</option>
+                <option value="What was the name of your first-grade teacher?">What was the name of your first-grade teacher?</option>
+              </Form.Control>
               <Form.Control.Feedback type="invalid">Please provide a security question.</Form.Control.Feedback>
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
