@@ -5,7 +5,7 @@ const shell = electron.shell;
 const path = require("path");
 const isDev = require("electron-is-dev");
 var kill = require('tree-kill');
-var subpy = require('child_process').spawn(path.join(__dirname, "../scripts/app.exe"), {detached: true})
+var subpy = require('child_process').spawn(path.join(__dirname, "../../scripts/app.exe"), { detached: true });
 
 //var subpy
 let mainWindow;
@@ -13,8 +13,8 @@ let mainWindow;
 function createWindow() {
     //subpy = require('child_process').spawn(path.join(__dirname, "../../scripts/app.exe"), {detached: true})
 
-    mainWindow = new BrowserWindow({ 
-        width: 1200, 
+    mainWindow = new BrowserWindow({
+        width: 1200,
         height: 900,
         icon: "",
         center: true,
@@ -24,18 +24,18 @@ function createWindow() {
 
     mainWindow.loadURL(
         isDev
-        ? "http://localhost:3000"
-        : `file://${path.join(__dirname, "../build/index.html")}`
+            ? "http://localhost:3000"
+            : `file://${path.join(__dirname, "../build/index.html")}`
     );
 
-    mainWindow.webContents.on('new-window', function(e, url) {
+    mainWindow.webContents.on('new-window', function (e, url) {
         e.preventDefault();
         shell.openExternal(url);
     });
 
     mainWindow.setMenu(null);
     //mainWindow.on("closed", () => (mainWindow = null));
-    mainWindow.on("closed", function () { 
+    mainWindow.on("closed", function () {
         kill(subpy.pid);
         //process.kill(subpy.pid);
         mainWindow = null;
@@ -59,6 +59,6 @@ app.on("window-all-closed", () => {
 
 app.on("activate", () => {
     if (mainWindow === null) {
-    createWindow();
+        createWindow();
     }
 });

@@ -109,6 +109,16 @@ export default function SignIn() {
                 <option value="What was the name of your elementary school?">What was the name of your elementary school?</option>
                 <option value="In what city were you born?">In what city were you born?</option>
                 <option value="What is your favorite food?">What is your favorite food?</option>
+                <option value="What was your childhood nickname?">What was your childhood nickname?</option>
+                <option value="What is the name of your favorite childhood friend?">What is the name of your favorite childhood friend?</option>
+                <option value="What was the name of the street you grew up on?">What was the name of the street you grew up on?</option>
+                <option value="What is the name of your first school?">What is the name of your first school?</option>
+                <option value="What is your favorite book?">What is your favorite book?</option>
+                <option value="What is your favorite movie?">What is your favorite movie?</option>
+                <option value="What is the name of your first employer?">What is the name of your first employer?</option>
+                <option value="What is the name of the town where your first job was located?">What is the name of the town where your first job was located?</option>
+                <option value="What was the make and model of your first car?">What was the make and model of your first car?</option>
+                <option value="What was the name of your first-grade teacher?">What was the name of your first-grade teacher?</option>
               </Form.Control>
               <Form.Control.Feedback type="invalid">Please provide a security question.</Form.Control.Feedback>
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
