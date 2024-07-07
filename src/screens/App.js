@@ -10,6 +10,7 @@ import Passwords from '../components/Passwords';
 import NavbarComponent from '../components/Navbar';
 import { useHistory } from 'react-router';
 import { Flash } from '../components/Flash/flash';
+import { saveAs } from 'file-saver';
 
 const AppDashboard = () => {
   const history = useHistory()
@@ -47,6 +48,18 @@ const AppDashboard = () => {
     setIsPending(false)
   }, [])
 
+  const exportToCSV = () => {
+    const email = localStorage.getItem('email')
+    const filename = `${email}.csv`
+    const headers = "Account Name,Account URL,Email,Password\n"
+    const csvData = passwords.map(password => 
+      `${password.accountName},${password.accountUrl},${password.email},${password.password}`
+    ).join("\n")
+    const csvContent = headers + csvData
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    saveAs(blob, filename)
+  }
+
   return (
     <>
       <NavbarComponent passwords={passwords} handleCreate={handleCreate} />
@@ -67,6 +80,13 @@ const AppDashboard = () => {
           setPasswords(passwords.filter(ele => ele.id !== id))
         }}
       />
+      <div className="container my-4">
+        <div className="row justify-content-center">
+          <div className="col-auto">
+            <button onClick={exportToCSV} className="btn btn-primary">Export to CSV</button>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

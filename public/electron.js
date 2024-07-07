@@ -5,7 +5,7 @@ const shell = electron.shell;
 const path = require("path");
 const isDev = require("electron-is-dev");
 var kill = require('tree-kill');
-var subpy = require('child_process').spawn(path.join(__dirname, "../../scripts/app.exe"), { detached: true });
+var subpy = require('child_process').spawn(path.join(__dirname, "../scripts/app.exe"), { detached: true });
 
 //var subpy
 let mainWindow;
@@ -15,11 +15,11 @@ function createWindow() {
 
     mainWindow = new BrowserWindow({
         width: 1200,
-        height: 900,
+        height: 750,
         icon: "",
         center: true,
         minWidth: 900,
-        minHeight: 1200
+        minHeight: 700
     });
 
     mainWindow.loadURL(
@@ -33,7 +33,7 @@ function createWindow() {
         shell.openExternal(url);
     });
 
-    mainWindow.setMenu(null);
+    mainWindow.setMenu(false);
     //mainWindow.on("closed", () => (mainWindow = null));
     mainWindow.on("closed", function () {
         kill(subpy.pid);
