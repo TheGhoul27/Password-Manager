@@ -10,6 +10,7 @@ import NavbarComponent from '../components/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { Flash } from '../components/Flash/flash';
+import '../styles/scrollbar.css';
 
 export default function ForgotPassword() {
 

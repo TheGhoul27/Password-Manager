@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { 
   getPasswordsByUserID, 
   createPassword, 
@@ -11,54 +11,57 @@ import NavbarComponent from '../components/Navbar';
 import { useHistory } from 'react-router';
 import { Flash } from '../components/Flash/flash';
 import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
+import '../styles/scrollbar.css';
 
 const AppDashboard = () => {
-  const history = useHistory()
+  const history = useHistory();
   if (!localStorage.getItem('email')) {
     setTimeout(() => {
-      window.flash('You need to be logged in', 'warning')
-    }, 100)
-    history.push('/login')
+      window.flash('You need to be logged in', 'warning');
+    }, 100);
+    history.push('/login');
   }
 
-  const [passwords, setPasswords] = useState([])
-  const [isPending, setIsPending] = useState(false)
+  const [passwords, setPasswords] = useState([]);
+  const [isPending, setIsPending] = useState(false);
 
   const handleCreate = async password => {
     // save to dB
-    password.userId = localStorage.getItem('email')
+    password.userId = localStorage.getItem('email');
     const newPassword = await createPassword(
       password.accountName,
       password.accountUrl,
       password.email,
       password.password,
       password.userId
-    )
-    setPasswords([newPassword, ...passwords])
-    window.flash('New contact created successfully', 'success')
-  }
+    );
+    setPasswords([newPassword, ...passwords]);
+    window.flash('New contact created successfully', 'success');
+  };
 
   useEffect(() => {
-    setIsPending(true)
+    setIsPending(true);
     const getContacts = async () => {
-      let passwordData = await getPasswordsByUserID(localStorage.getItem('email'))
-      setPasswords(passwordData)
-    }
-    getContacts()
-    setIsPending(false)
-  }, [])
+      let passwordData = await getPasswordsByUserID(localStorage.getItem('email'));
+      setPasswords(passwordData);
+    };
+    getContacts();
+    setIsPending(false);
+  }, []);
 
-  const exportToCSV = () => {
-    const email = localStorage.getItem('email')
-    const filename = `${email}.csv`
-    const headers = "Account Name,Account URL,Email,Password\n"
-    const csvData = passwords.map(password => 
-      `${password.accountName},${password.accountUrl},${password.email},${password.password}`
-    ).join("\n")
-    const csvContent = headers + csvData
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
-    saveAs(blob, filename)
-  }
+  const exportToExcel = () => {
+    const email = localStorage.getItem('email');
+    const filename = `${email}.xlsx`;
+
+    const ws = XLSX.utils.json_to_sheet(passwords);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Passwords");
+
+    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([wbout], { type: 'application/octet-stream' });
+    saveAs(blob, filename);
+  };
 
   return (
     <>
@@ -73,17 +76,17 @@ const AppDashboard = () => {
             password: payload.password,
             user: localStorage.getItem('email')
           }, payload.id);
-          setPasswords(passwords.map(password => password.id === payload.id ? payload : password))
+          setPasswords(passwords.map(password => password.id === payload.id ? payload : password));
         }}
         handleDelete={async id => {
           await deletePassword([id, localStorage.getItem('email')]);
-          setPasswords(passwords.filter(ele => ele.id !== id))
+          setPasswords(passwords.filter(ele => ele.id !== id));
         }}
       />
       <div className="container my-4">
         <div className="row justify-content-center">
           <div className="col-auto">
-            <button onClick={exportToCSV} className="btn btn-primary">Export to CSV</button>
+            <button onClick={exportToExcel} className="btn btn-primary">Export to Excel</button>
           </div>
         </div>
       </div>

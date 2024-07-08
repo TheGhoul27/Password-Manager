@@ -32,6 +32,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import {Flash} from '../components/Flash/flash'
 import hero1 from '../assets/illus5.jpg';
 import hero from '../assets/illus7.png';
+import '../styles/scrollbar.css';
 
 const Home = () => {
   return (

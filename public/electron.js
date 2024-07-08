@@ -5,7 +5,7 @@ const shell = electron.shell;
 const path = require("path");
 const isDev = require("electron-is-dev");
 var kill = require('tree-kill');
-var subpy = require('child_process').spawn(path.join(__dirname, "../../scripts/app.exe"), { detached: true });
+var subpy = require('child_process').spawn(path.join(__dirname, "../scripts/app.exe"), { detached: true });
 
 //var subpy
 let mainWindow;
